@@ -92,10 +92,14 @@ class PokemonDetailFragment : Fragment() {
 
             override fun onResponse(call: Call<PokemonObject?>, response: Response<PokemonObject?>) {
                 if (response.isSuccessful){
+                    var myType: String = " "
                     txtDetailName.text = response.body()?.name
                     txtDetailHeight.text = response.body()?.height.toString()
                     txtDetailWeight.text = response.body()?.weight.toString()
-                    txtDetailType.text = response.body()?.types.toString()
+                    for(i in 0 until (response.body()?.types?.size ?: 0)){
+                        myType = myType+ (response.body()?.types?.get(i)?.type?.name ?: "null")+", "
+                    }
+                    txtDetailType.text = myType
                     txtDetailId.text = response.body()?.id.toString()
                     Picasso.get()
                         .load(response.body()?.sprites?.frontDefault)

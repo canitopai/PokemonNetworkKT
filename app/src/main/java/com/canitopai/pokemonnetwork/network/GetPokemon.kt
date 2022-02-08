@@ -13,7 +13,7 @@ import okhttp3.ResponseBody
 
 
 interface GetPokemon {
-    @GET("?offset=30&limit=50")
+    @GET("?offset=0&limit=200")
     fun getPkmns(): Call<PokemonInfo>
 
     @GET

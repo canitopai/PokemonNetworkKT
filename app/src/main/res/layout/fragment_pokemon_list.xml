@@ -5,27 +5,48 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PokemonList" >
+    tools:context=".PokemonListFragment" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_pokemon"
-        android:layout_width="416dp"
-        android:layout_height="677dp"
+        android:layout_width="0dp"
+        android:layout_height="616dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/rv_pokemon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935" />
+        android:background="#0066cc"
+        app:layout_constraintVertical_bias="0.0">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="Pokedex"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/rv_pokemon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/lblTitle"
+            android:layout_width="313dp"
+            android:layout_height="62dp"
+            android:ellipsize="none"
+            android:fontFamily="@font/skranji"
+            android:lineSpacingExtra="10sp"
+            android:shadowColor="#070707"
+            android:shadowDx="10"
+            android:shadowRadius="5"
+            android:text="Pokedex"
+            android:textAlignment="center"
+            android:textColor="#FFEB3B"
+            android:textSize="48sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
