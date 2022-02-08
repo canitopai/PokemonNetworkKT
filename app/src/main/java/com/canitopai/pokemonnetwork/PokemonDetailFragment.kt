@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.canitopai.pokemonnetwork.databinding.FragmentPokemonDetailBinding
 import com.canitopai.pokemonnetwork.model.Pokemon
 import com.canitopai.pokemonnetwork.model.PokemonInfo
+import com.canitopai.pokemonnetwork.model.PokemonObject
 import com.canitopai.pokemonnetwork.network.GetPokemon
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_pokemon_detail.*
@@ -75,32 +76,31 @@ class PokemonDetailFragment : Fragment() {
     }
 
     private fun requestData() {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(args.url+"/")
+        val retrofit = Retrofit.Builder().baseUrl("https://pokeapi.co/api/v2/pokemon/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         val service: GetPokemon = retrofit.create(GetPokemon::class.java)
 
-        service.getPkmnDetailed().enqueue(object : Callback<Pokemon> {
+        service.getPkmnDetailed(url)?.enqueue(object : Callback<PokemonObject?> {
 
 
-            override fun onFailure(call: Call<Pokemon>, t: Throwable) {
+            override fun onFailure(call: Call<PokemonObject?>, t: Throwable) {
                 Toast.makeText(context, "Algo no ha funcionado como esperábamos", Toast.LENGTH_SHORT).show()
                 Log.e("Retrofit", "Error: ${t.localizedMessage}", t)
             }
 
-            override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
+            override fun onResponse(call: Call<PokemonObject?>, response: Response<PokemonObject?>) {
                 if (response.isSuccessful){
                     txtDetailName.text = response.body()?.name
                     txtDetailHeight.text = response.body()?.height.toString()
                     txtDetailWeight.text = response.body()?.weight.toString()
-                    txtDetailType.text = response.body()?.types?.get(0)
+                    txtDetailType.text = response.body()?.types.toString()
                     txtDetailId.text = response.body()?.id.toString()
                     Picasso.get()
-                    .load(response.body()?.sprite?.front_default)
-                    .placeholder(R.drawable.ic_launcher_foreground)
-                    .into(imageView2)
+                        .load(response.body()?.sprites?.frontDefault)
+                        .placeholder(R.drawable.ic_launcher_foreground)
+                        .into(imageView2)
                     Log.e("Retrofit","Salió bien")
                 } else {
                     Toast.makeText(context, "400", Toast.LENGTH_SHORT).show()

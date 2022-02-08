@@ -19,7 +19,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-//url base api: https://randomuser.me/api/
+
 class PokemonListFragment : Fragment() {
     private var _binding: FragmentPokemonListBinding? = null
     private val binding
